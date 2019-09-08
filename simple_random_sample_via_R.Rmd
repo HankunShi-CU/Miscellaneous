@@ -1,0 +1,32 @@
+---
+title: "Simple random sample"
+author: "hshi"
+date: "9/7/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## code
+```{r}
+x=c(rep(0,7),rep(1,93))
+n=100000
+ind=rep(0,n)
+ptm=proc.time()
+for(i in 1:n){
+  ming=sample(x,50)
+  if(min(ming)==0){ ind[i]=1 }
+}
+```
+
+## result
+```{r}
+cat("simulated prob =",mean(ind))
+true_prob=1-choose(93,50)/choose(100,50)
+cat("true prob =",true_prob)
+```
+
+```{r}
+cat("running time =", (proc.time()-ptm)["elapsed"],"s")
+```
+
